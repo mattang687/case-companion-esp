@@ -8,10 +8,7 @@
 // define si7021 address
 #define SI7021_ADDRESS 0x40
 
-// define services, characteristics, and their properties
-#define BatteryService BLEUUID((uint16_t)0x180F) 
-BLECharacteristic BatteryLevelCharacteristic(BLEUUID((uint16_t)0x2A19), BLECharacteristic::PROPERTY_READ);
-
+// define service, characteristics, and their properties
 #define EnvironmentalService BLEUUID((uint16_t)0x181A)
 BLECharacteristic TemperatureCharacteristic(BLEUUID((uint16_t)0x2A6E), BLECharacteristic::PROPERTY_READ);
 BLECharacteristic HumidityCharacteristic(BLEUUID((uint16_t)0x2A6F), BLECharacteristic::PROPERTY_READ);
@@ -21,21 +18,17 @@ void InitBLE() {
   // create the server
   BLEServer *pServer = BLEDevice::createServer();
 
-  // add services
-  BLEService *pBattery = pServer->createService(BatteryService);
+  // add service
   BLEService *pEnviro = pServer->createService(EnvironmentalService);
 
   // add characteristics
-  pBattery->addCharacteristic(&BatteryLevelCharacteristic);
   pEnviro->addCharacteristic(&TemperatureCharacteristic);
   pEnviro->addCharacteristic(&HumidityCharacteristic);
 
-  // add service uuids to advertisement
-  pServer->getAdvertising()->addServiceUUID(BatteryService);
+  // add service uuid to advertisement
   pServer->getAdvertising()->addServiceUUID(EnvironmentalService);
 
-  // start services
-  pBattery->start();
+  // start service
   pEnviro->start();
 
   // start advertising
@@ -100,9 +93,6 @@ void loop()
   // write to BLE characteristics
   TemperatureCharacteristic.setValue((uint8_t*)&bigTemp, 2);
   HumidityCharacteristic.setValue((uint8_t*)&bigHum, 2);
-
-  uint8_t dummyBat = 12;
-  BatteryLevelCharacteristic.setValue(&dummyBat, 1);
   
   delay(1000);
 }
