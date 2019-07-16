@@ -1,5 +1,5 @@
 # Case Companion
-An embedded instrument case monitor created with Flutter and Arduino
+An instrument monitoring system created with Flutter and Arduino
 
 ## Introduction
 Bad weather can be pretty dangerous to musical instruments (my viola cracked in the winter a few years ago). Many solutions exist to combat unfriendly weather, like Dampits, humidifiers, covers, and expensive cases, but there's very little useful evidence of their effectiveness, since everyone's setup is so different. The Case Companion is my solution to this problem. It consists of this device and a [Flutter app](https://github.com/mattang687/case-companion.git), and it allows musicians to record and view the temperature and humidity in their case over time.
@@ -22,4 +22,5 @@ Bad weather can be pretty dangerous to musical instruments (my viola cracked in 
 * For some additional power savings, you can turn the CPU frequency down to 80MHz under "tools" before uploading.
 
 ## Future Plans
+* Add smart charging to accurately measure battery life and prevent over-charge/discharge
 * Use a different SoC such as the nRF52840, as the ESP32 isn't nearly as power efficient as those specifically designed for BLE (though it is much cheaper).
